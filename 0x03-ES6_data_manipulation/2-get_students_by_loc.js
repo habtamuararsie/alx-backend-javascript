@@ -1,3 +1,6 @@
 export default function getStudentsByLocation(students, city) {
-    return students.filter((student) => student.location.localeCompare(city) === 0);
+  if (students instanceof Array) {
+    return students.filter((student) => student.location === city);
   }
+  return [];
+}

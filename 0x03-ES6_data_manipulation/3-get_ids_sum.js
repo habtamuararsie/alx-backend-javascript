@@ -1,3 +1,9 @@
 export default function getStudentIdsSum(students) {
-    return students.reduce((accumulator, student) => accumulator + student.id, 0);
+  if (students instanceof Array) {
+    return students.reduce(
+      (prevStudent, curStudent) => prevStudent.id || prevStudent + curStudent.id,
+      0,
+    );
   }
+  return 0;
+}
