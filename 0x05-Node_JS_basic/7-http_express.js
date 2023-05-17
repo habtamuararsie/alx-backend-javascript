@@ -10,7 +10,7 @@ const DB_FILE = process.argv.length > 2 ? process.argv[2] : "";
  * @param {String} dataPath The path to the CSV data file.
  * @author Habtamu Ararsie <https://github.com/habtamuararsie>
  */
-const countStudents = (dataPath) =>
+const countStud = (dataPath) =>
   new Promise((resolve, reject) => {
     if (!dataPath) {
       reject(new Error("Cannot load the database"));
@@ -23,7 +23,7 @@ const countStudents = (dataPath) =>
         if (data) {
           const reportParts = [];
           const fileLines = data.toString("utf-8").trim().split("\n");
-          const studentGroups = {};
+          const studGroups = {};
           const dbFieldNames = fileLines[0].split(",");
           const studentPropNames = dbFieldNames.slice(
             0,
@@ -31,27 +31,27 @@ const countStudents = (dataPath) =>
           );
 
           for (const line of fileLines.slice(1)) {
-            const studentRecord = line.split(",");
-            const studentPropValues = studentRecord.slice(
+            const studRecord = line.split(",");
+            const studentPropValues = studRecord.slice(
               0,
-              studentRecord.length - 1
+              studRecord.length - 1
             );
-            const field = studentRecord[studentRecord.length - 1];
-            if (!Object.keys(studentGroups).includes(field)) {
-              studentGroups[field] = [];
+            const field = studRecord[studRecord.length - 1];
+            if (!Object.keys(studGroups).includes(field)) {
+              studGroups[field] = [];
             }
-            const studentEntries = studentPropNames.map((propName, idx) => [
+            const studEntries = studentPropNames.map((propName, idx) => [
               propName,
               studentPropValues[idx],
             ]);
-            studentGroups[field].push(Object.fromEntries(studentEntries));
+            studGroups[field].push(Object.fromEntries(studEntries));
           }
 
-          const totalStudents = Object.values(studentGroups).reduce(
+          const totStudents = Object.values(studGroups).reduce(
             (pre, cur) => (pre || []).length + cur.length
           );
-          reportParts.push(`Number of students: ${totalStudents}`);
-          for (const [field, group] of Object.entries(studentGroups)) {
+          reportParts.push(`Number of students: ${totStudents}`);
+          for (const [field, group] of Object.entries(studGroups)) {
             reportParts.push(
               [
                 `Number of students in ${field}: ${group.length}.`,
@@ -73,7 +73,7 @@ app.get("/", (_, res) => {
 app.get("/students", (_, res) => {
   const responseParts = ["This is the list of our students"];
 
-  countStudents(DB_FILE)
+  countStud(DB_FILE)
     .then((report) => {
       responseParts.push(report);
       const responseText = responseParts.join("\n");
