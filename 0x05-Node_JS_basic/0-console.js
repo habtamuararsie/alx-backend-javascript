@@ -3,8 +3,8 @@
  * @param {String} message the message to be display
  * @author Habtamu Ararsie <https://github.com/habtamuararsie>
  */
-const displayMessage = (mes) => {
-    console.log(mes);
+const displayMessage = (mesg) => {
+    console.log(mesg);
   };
   
   module.exports = displayMessage;
