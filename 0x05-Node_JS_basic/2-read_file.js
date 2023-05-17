@@ -5,7 +5,7 @@ const fs = require("fs");
  * @param {String} dataPath The path to the CSV data file.
  * @author Habtamu Ararsie <https://github.com/habtamuararsie>
  */
-const countStud = (dataPath) => {
+const countStudents = (dataPath) => {
   if (!fs.existsSync(dataPath)) {
     throw new Error("Cannot load the database");
   }
@@ -47,4 +47,4 @@ const countStud = (dataPath) => {
   }
 };
 
-module.exports = countStud;
+module.exports = countStudents;
