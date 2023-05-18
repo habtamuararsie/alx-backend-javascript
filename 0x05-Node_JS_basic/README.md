@@ -127,5 +127,3 @@ module.exports = {
 
 📝 Author
 👨 Habtamu Ararsie
-Github
-Linkedin
