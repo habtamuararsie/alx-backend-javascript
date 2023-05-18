@@ -23,5 +23,3 @@ Requests
 How to Test NodeJS Apps using Mocha, Chai and SinonJS
 📝 Author
 👨 Habtamu Ararsie
-Github
-Linkedin
